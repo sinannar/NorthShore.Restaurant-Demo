@@ -3,6 +3,7 @@ using Abp.Zero.EntityFrameworkCore;
 using NorthShore.Restaurant.Authorization.Roles;
 using NorthShore.Restaurant.Authorization.Users;
 using NorthShore.Restaurant.MultiTenancy;
+using NorthShore.Restaurant.Restaurant;
 
 namespace NorthShore.Restaurant.EntityFrameworkCore
 {
