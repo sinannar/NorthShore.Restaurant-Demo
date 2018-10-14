@@ -32,5 +32,40 @@ namespace NorthShore.Restaurant.Restaurant
             var adapter = new CreateFoodAdapter();
             await _restaurantManager.CreateFood(adapter.Transform(requestDto));
         }
+
+        public async Task EditFood(EditFoodDto request)
+        { 
+            var entity = _foodRepository.Get(request.Id);
+            if (entity != null)
+            {
+                var adapter = new EditFoodAdapter();
+                await _restaurantManager.EditFood(adapter.Transform(request, entity));
+            }
+            else
+            {
+                throw new Exception("Given food is not found to delete");
+            }
+        }
+
+        public async Task DeleteFood(long requestId)
+        {
+            Food entity = await _foodRepository.GetAsync(requestId);
+            if (entity != null)
+            {
+                await _restaurantManager.DeleteFood(entity);
+            }
+            else
+            {
+                throw new Exception("Given food is not found to delete");
+            }
+            
+        }
+
+        public List<ShowFoodDto> ListFoods()
+        {
+            var adapter = new ListFoodAdapter();
+            var list = _restaurantManager.ListFood();
+            return adapter.Transform(list);
+        }
     }
 }

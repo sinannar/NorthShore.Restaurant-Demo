@@ -9,5 +9,8 @@ namespace NorthShore.Restaurant.Restaurant
     public interface IRestaurantAppService
     {
         Task CreateFood(CreateFoodDto request);
+        Task EditFood(EditFoodDto request);
+        Task DeleteFood(long requestId);
+        List<ShowFoodDto> ListFoods();
     }
 }
