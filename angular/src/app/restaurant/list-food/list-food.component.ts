@@ -42,9 +42,16 @@ export class ListFoodComponent extends AppComponentBase {
     }
 
     deleteFood(food: ShowFoodDto) {
-        this._restaurantService.deleteFood(food.id).subscribe(() => {
-            this.list();
-        })
+        this.message.confirm(
+            "Delete food '" + food.name + "'?",
+            (result: boolean) => {
+                if (result) {
+                    this._restaurantService.deleteFood(food.id).subscribe(() => {
+                        this.list();
+                    })
+                }
+            }
+        );
     }
 
     refresh($event:any) {
