@@ -33,6 +33,11 @@ namespace NorthShore.Restaurant.Restaurant
             await _restaurantManager.CreateFood(adapter.Transform(requestDto));
         }
 
+        public async Task CreateMenu(CreateMenuDto requestDto){
+            var adapter = new CreateMenuAdapter();
+            await _restaurantManager.CreateMenu(adapter.Transform(requestDto));
+        }
+
         public async Task EditFood(EditFoodDto request)
         { 
             var entity = _foodRepository.Get(request.Id);
@@ -61,11 +66,75 @@ namespace NorthShore.Restaurant.Restaurant
             
         }
 
+        public async Task DeleteMenu(long requestId)
+        {
+            Menu entity = await _menuRepository.GetAsync(requestId);
+            if (entity != null)
+            {
+                await _restaurantManager.DeleteMenu(entity);
+            }
+            else
+            {
+                throw new Exception("Given menu is not found to delete");
+            }
+        }
+
         public List<ShowFoodDto> ListFoods()
         {
             var adapter = new ListFoodAdapter();
             var list = _restaurantManager.ListFood();
             return adapter.Transform(list);
+        }
+
+        public List<ShowMenuDto> ListMenus()
+        {
+            var adapter = new ListMenuAdapter();
+            var list = _restaurantManager.ListMenu();
+            return adapter.Transform(list);
+        }
+
+        public List<ShowFoodDto> ListFoodsInMenu(long menuId)
+        {
+            var menu = _restaurantManager.GetMenuWithMappings(menuId);
+            if(menu != null)
+            {
+                var menuFoodMappings = menu.FoodMappings;
+                var mappedFoods = _restaurantManager.ListMenuFoods(menuFoodMappings);
+                var adapter = new ListFoodAdapter();
+                return adapter.Transform(mappedFoods);
+            }
+            else
+            {
+                throw new Exception("Given menu is not found");
+            }
+        }
+
+        public List<ShowFoodDto> ListFoodsNotInMenu(long menuId)
+        {
+            var menu = _restaurantManager.GetMenuWithMappings(menuId);
+            if(menu != null)
+            {
+                var menuFoodMappings = menu.FoodMappings;
+                var mappedFoods = _restaurantManager.ListNonMenuFoods(menuFoodMappings);
+                var adapter = new ListFoodAdapter();
+                return adapter.Transform(mappedFoods);
+            }
+            else
+            {
+                throw new Exception("Given menu is not found");
+            }
+        }
+
+        public async Task AddFoodToMenu(AddFoodToMenuDto request){
+            await _restaurantManager.CreateFoodMenuMapping(request.FoodIds, request.MenuId);
+            await UnitOfWorkManager.Current.SaveChangesAsync();
+            await _restaurantManager.UpdateMenuValues(request.MenuId);
+        }
+
+        public async Task RemoveFoodFromMenu(RemoveFoodFromMenuDto request){
+            await _restaurantManager.DeleteFoodMenuMapping(request.FoodId, request.MenuId);
+            await UnitOfWorkManager.Current.SaveChangesAsync();
+            await _restaurantManager.UpdateMenuValues(request.MenuId);
         }
     }
 }
