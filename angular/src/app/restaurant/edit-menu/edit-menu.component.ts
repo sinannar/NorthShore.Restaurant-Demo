@@ -17,15 +17,6 @@ export class EditMenuComponent extends AppComponentBase implements OnInit {
     foodsInMenu: ShowFoodDto[];
     foodsNotInMenu: ShowFoodDto[];
 
-    _selectedFood: ShowFoodDto;
-    set selectedFood(value: ShowFoodDto) {
-        this._selectedFood = value;
-        this.setNewMapping(value);
-    }
-    get selectedFood(): ShowFoodDto {
-        return this._selectedFood;
-    }
-
     setNewMapping(food: ShowFoodDto) {
         var request = new AddFoodToMenuDto();
         request.menuId = this.selectedMenu.id;

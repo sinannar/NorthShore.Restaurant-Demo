@@ -1,5 +1,5 @@
-<div bsModal #editMenuModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog"
-    aria-labelledby="editMenuModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+<div bsModal #editMenuModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="editMenuModal"
+    aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog">
         <div *ngIf="selectedMenu" #modalContent class="modal-content">
             <div class="modal-header">
@@ -21,17 +21,20 @@
                 <div class="form-group form-float">
                     <span>{{l("DiscountedPrice")}} {{selectedMenu.discountedPrice}}</span>
                 </div>
-
-                <div *ngIf="foodsNotInMenu && foodsNotInMenu.length > 0" class="form-group form-float">
-                    <select [(ngModel)]="selectedFood">
-                        <option *ngFor="let food of foodsNotInMenu" [ngValue]="food">
-                            {{food.name}}
-                        </option>
-                    </select>
+                <div class="form-group form-float">
+                    <!-- https://getbootstrap.com/docs/3.3/components/#dropdowns -->
+                    <div *ngIf="foodsNotInMenu && foodsNotInMenu.length > 0" class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="FoodsNotInMenu" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true">
+                            {{l('SelectFoodForMenu')}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="FoodsNotInMenu">
+                            <li *ngFor="let food of foodsNotInMenu"><a (click)="setNewMapping(food)">{{food.name}}</a></li>
+                        </ul>
+                    </div>
                 </div>
-
                 <div *ngIf="foodsInMenu && foodsInMenu.length > 0" class="form-group form-float">
-
                     <label class="form-label">{{l("MenuContent")}}</label>
                     <div>
                         <table class="table table-hover table-striped">
@@ -68,15 +71,14 @@
                                         <i class="material-icons" *ngIf="!food.isNutFree" style="color:red;">indeterminate_check_box</i>
                                     </td>
                                     <td class="dropdown">
-                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="material-icons">menu</i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="deleteFoodMapping(food)"><i
-                                                            class="material-icons">delete_sweep</i>{{l('Delete')}}</a></li>
-                                            </ul>
-                                        </td>
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">menu</i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="deleteFoodMapping(food)"><i
+                                                        class="material-icons">delete_sweep</i>{{l('Delete')}}</a></li>
+                                        </ul>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
