@@ -114,5 +114,7 @@
     <text name="Calorie">Calorie</text>
     <text name="Menu">Menu</text>
     <text name="MenuList">Menu list</text>
+    <text name="SelectFoodForMenu">Select food to add to menu</text>
+    
   </texts>
 </localizationDictionary>
