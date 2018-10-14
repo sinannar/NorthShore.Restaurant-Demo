@@ -91,5 +91,28 @@
     <text name="StartTyping">Start Typing</text>
     <text name="Skins">Skins</text>
     <text name="Settings">Settings</text>
+
+    <text name="CreateNewFood">Create new food</text>
+    <text name="FoodName">Food name</text>
+    <text name="EditFood">Edit food</text>
+    <text name="IsDairyFree">Dairy free</text>
+    <text name="IsGlutenFree">Gluten free</text>
+    <text name="IsNutFree">Nut free</text>
+    <text name="FoodList">Food list</text>
+    <text name="CreateNewMenu">Create new menu</text>
+    <text name="MenuName">Menu name</text>
+    <text name="Discount">Discount</text>
+    <text name="DiscountRate">Discount rate</text>
+    <text name="GlutenFreeOption">Gluten free</text>
+    <text name="DairyFreeOption">Dairy free</text>
+    <text name="NutFreeOption">Nut free</text>
+    <text name="Price">Price</text>
+    <text name="TotalCalorie">Total calorie</text>
+    <text name="TotalPrice">Total price</text>
+    <text name="DiscountedPrice">Discounted price</text>
+    <text name="MenuContent">Menu content</text>
+    <text name="Calorie">Calorie</text>
+    <text name="Menu">Menu</text>
+    <text name="MenuList">Menu list</text>
   </texts>
 </localizationDictionary>
