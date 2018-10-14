@@ -37,10 +37,17 @@ export class EditMenuComponent extends AppComponentBase implements OnInit {
     }
 
     deleteFoodMapping(food: ShowFoodDto) {
-        this._restaurantService.removeFoodFromMenu(this.selectedMenu.id, food.id).subscribe(() => {
-            this.intializeEditMenu();
-            this.modalSave.emit(null);
-        });
+        this.message.confirm(
+            "Delete food '" + food.name + "' from menu '"+this.selectedMenu.name+"'?",
+            (result: boolean) => {
+                if (result) {
+                    this._restaurantService.removeFoodFromMenu(this.selectedMenu.id, food.id).subscribe(() => {
+                        this.intializeEditMenu();
+                        this.modalSave.emit(null);
+                    });
+                }
+            }
+        );
     }
 
     _selectedMenu: ShowMenuDto;

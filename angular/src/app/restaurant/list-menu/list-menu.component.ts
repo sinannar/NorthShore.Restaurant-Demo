@@ -42,9 +42,16 @@ export class ListMenuComponent extends AppComponentBase {
     }
 
     deleteMenu(menu: ShowMenuDto) {
-        this._restaurantService.deleteMenu(menu.id).subscribe(() => {
-            this.list();
-        })
+        this.message.confirm(
+            "Delete food '" + menu.name + "'?",
+            (result: boolean) => {
+                if (result) {
+                    this._restaurantService.deleteMenu(menu.id).subscribe(() => {
+                        this.list();
+                    })
+                }
+            }
+        );
     }
 
     refresh($event:any) {
