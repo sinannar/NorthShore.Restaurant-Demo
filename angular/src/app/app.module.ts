@@ -34,6 +34,12 @@ import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 import { MaterialInput } from '@shared/directives/material-input.directive';
 
+import { RestaurantComponent } from '@app/restaurant/restaurant.component';
+
+import { ListFoodComponent } from '@app/restaurant/list-food/list-food.component';
+import { CreateFoodComponent } from '@app/restaurant/create-food/create-food.component';
+import { EditFoodComponent } from '@app/restaurant/edit-food/edit-food.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -45,7 +51,7 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         UsersComponent,
 		CreateUserComponent,
 		EditUserComponent,
-      	RolesComponent,        
+        RolesComponent,
 		CreateRoleComponent,
 		EditRoleComponent,
         TopBarComponent,
@@ -53,8 +59,13 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         SideBarUserAreaComponent,
         SideBarNavComponent,
         SideBarFooterComponent,
-        RightSideBarComponent
-    
+        RightSideBarComponent,
+
+        RestaurantComponent,
+        ListFoodComponent,
+        CreateFoodComponent,
+        EditFoodComponent
+
     ],
     imports: [
         CommonModule,
