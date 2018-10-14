@@ -1,0 +1,88 @@
+<div bsModal #editMenuModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog"
+    aria-labelledby="editMenuModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog">
+        <div *ngIf="selectedMenu" #modalContent class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{selectedMenu.name}}</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group form-float">
+                    <span>{{l("TotalCalorie")}} {{selectedMenu.totalCalorie}}</span>
+                </div>
+                <div class="form-group form-float">
+                    <span>{{l("TotalPrice")}} {{selectedMenu.totalPrice}}</span>
+                </div>
+                <div class="form-group form-float">
+                    <span>{{l("Discount")}} {{selectedMenu.discountRate}}%</span>
+                </div>
+                <div class="form-group form-float">
+                    <span>{{l("DiscountedPrice")}} {{selectedMenu.discountedPrice}}</span>
+                </div>
+
+                <div *ngIf="foodsNotInMenu && foodsNotInMenu.length > 0" class="form-group form-float">
+                    <select [(ngModel)]="selectedFood">
+                        <option *ngFor="let food of foodsNotInMenu" [ngValue]="food">
+                            {{food.name}}
+                        </option>
+                    </select>
+                </div>
+
+                <div *ngIf="foodsInMenu && foodsInMenu.length > 0" class="form-group form-float">
+
+                    <label class="form-label">{{l("MenuContent")}}</label>
+                    <div>
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>{{l('Name')}}</th>
+                                    <th>{{l('Calorie')}}</th>
+                                    <th>
+                                        <div style="text-align:center">{{l('IsDairyFree')}}</div>
+                                    </th>
+                                    <th>
+                                        <div style="text-align:center">{{l('IsGlutenFree')}}</div>
+                                    </th>
+                                    <th>
+                                        <div style="text-align:center">{{l('IsNutFree')}}</div>
+                                    </th>
+                                    <th>{{l('Actions')}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let food of foodsInMenu">
+                                    <td>{{food.name}}</td>
+                                    <td>{{food.calorie}}</td>
+                                    <td align="center">
+                                        <i class="material-icons" *ngIf="food.isDairyFree" style="color:green;">check_box</i>
+                                        <i class="material-icons" *ngIf="!food.isDairyFree" style="color:red;">indeterminate_check_box</i>
+                                    </td>
+                                    <td align="center">
+                                        <i class="material-icons" *ngIf="food.isGlutenFree" style="color:green;">check_box</i>
+                                        <i class="material-icons" *ngIf="!food.isGlutenFree" style="color:red;">indeterminate_check_box</i>
+                                    </td>
+                                    <td align="center">
+                                        <i class="material-icons" *ngIf="food.isNutFree" style="color:green;">check_box</i>
+                                        <i class="material-icons" *ngIf="!food.isNutFree" style="color:red;">indeterminate_check_box</i>
+                                    </td>
+                                    <td class="dropdown">
+                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons">menu</i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="deleteFoodMapping(food)"><i
+                                                            class="material-icons">delete_sweep</i>Delete</a></li>
+                                            </ul>
+                                        </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
