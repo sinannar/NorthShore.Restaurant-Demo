@@ -40,6 +40,10 @@ import { ListFoodComponent } from '@app/restaurant/list-food/list-food.component
 import { CreateFoodComponent } from '@app/restaurant/create-food/create-food.component';
 import { EditFoodComponent } from '@app/restaurant/edit-food/edit-food.component';
 
+import { ListMenuComponent } from '@app/restaurant/list-menu/list-menu.component';
+import { CreateMenuComponent } from '@app/restaurant/create-menu/create-menu.component';
+import { EditMenuComponent} from '@app/restaurant/edit-menu/edit-menu.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -64,7 +68,10 @@ import { EditFoodComponent } from '@app/restaurant/edit-food/edit-food.component
         RestaurantComponent,
         ListFoodComponent,
         CreateFoodComponent,
-        EditFoodComponent
+        EditFoodComponent,
+        ListMenuComponent,
+        CreateMenuComponent,
+        EditMenuComponent
 
     ],
     imports: [
