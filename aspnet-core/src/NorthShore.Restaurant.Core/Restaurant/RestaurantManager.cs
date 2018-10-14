@@ -29,5 +29,20 @@ namespace NorthShore.Restaurant.Restaurant
         {
             await _foodRepository.InsertAsync(food);
         }
+
+        public async Task EditFood(Food food)
+        {
+            await _foodRepository.UpdateAsync(food);
+        }
+
+        public async Task DeleteFood(Food food)
+        {
+            await _foodRepository.DeleteAsync(food);
+        }
+
+        public IQueryable<Food> ListFood()
+        {
+            return _foodRepository.GetAllIncluding(m => m.MenuMappings);
+        }
     }
 }
